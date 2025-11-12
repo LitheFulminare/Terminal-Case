@@ -10,4 +10,10 @@ public class LivingRoom extends AbstractRoom
     {
         System.out.println("hmm coisas");
     }
+
+    @Override
+    public void onEvent(GameEvent gameEvent)
+    {
+
+    }
 }

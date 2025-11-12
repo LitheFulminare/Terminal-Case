@@ -1,3 +1,4 @@
+import events.GoToLivingRoomEvent;
 import events.InputEvent;
 import events.PrintMessageEvent;
 import publisherSubscriber.GameEvent;
@@ -103,7 +104,7 @@ public class IntroRoom extends AbstractRoom
 
         if (key.equals("2"))
         {
-            GameEvent.BUS.publish(new PrintMessageEvent(""));
+            GameEvent.BUS.publish(new GoToLivingRoomEvent());
         }
 
         if (key.equals("3"))
