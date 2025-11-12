@@ -1,4 +1,4 @@
-package publisherSubscriber;
+package publishersubscriber;
 
 public interface Subscriber
 {

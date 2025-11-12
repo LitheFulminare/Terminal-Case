@@ -1,4 +1,4 @@
-package publisherSubscriber;
+package publishersubscriber;
 
 import java.util.ArrayList;
 import java.util.List;
