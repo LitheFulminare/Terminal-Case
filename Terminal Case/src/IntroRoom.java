@@ -2,13 +2,16 @@ import events.InputEvent;
 import events.PrintMessageEvent;
 import publisherSubscriber.GameEvent;
 
+import java.util.Objects;
+
 public class IntroRoom extends AbstractRoom
 {
     enum states
     {
         choosingName,
         introMessage,
-        chooseInteraction
+        choosePrompt,
+        choosingInteraction
     }
 
     states currentState = states.choosingName;
@@ -36,16 +39,21 @@ public class IntroRoom extends AbstractRoom
     {
         if (gameEvent instanceof InputEvent inputEvent)
         {
-            if (currentState == states.choosingName)
+            if (currentState == states.choosingName && !inputEvent.key.equals("i"))
             {
                 gameManager.setPlayerName(inputEvent.key);
-                currentState = states.introMessage;
 
+                currentState = states.introMessage;
                 introMessage();
             }
-            if (currentState == states.chooseInteraction)
+            else if (currentState == states.choosePrompt && inputEvent.key.isEmpty())
             {
                 showChoices();
+                currentState = states.choosingInteraction;
+            }
+            else if (currentState == states.choosingInteraction)
+            {
+                interaction(inputEvent.key);
             }
         }
     }
@@ -69,7 +77,7 @@ public class IntroRoom extends AbstractRoom
         GameEvent.BUS.publish(new PrintMessageEvent("Tenho outros assuntos a tratar, então vou te deixar " +
                 "fazer o seu trabalho. Boa sorte, " + gameManager.player.name + "."));
 
-        currentState = states.chooseInteraction;
+        currentState = states.choosePrompt;
     }
 
     private void showChoices()
@@ -81,5 +89,31 @@ public class IntroRoom extends AbstractRoom
         GameEvent.BUS.publish(new PrintMessageEvent("\n 3 - Verificar a cozinha"));
 
         GameEvent.BUS.publish(new PrintMessageEvent("\n 4 - Verificar o quarto"));
+    }
+
+    private void interaction(String key)
+    {
+        if (key.equals("1"))
+        {
+            GameEvent.BUS.publish(new PrintMessageEvent("\nO corpo não apresenta nenhuma contusão, corte ou " +
+                    "sinal de briga, mas exala um cheiro forte de vômito"));
+
+            currentState = states.choosePrompt;
+        }
+
+        if (key.equals("2"))
+        {
+            GameEvent.BUS.publish(new PrintMessageEvent(""));
+        }
+
+        if (key.equals("3"))
+        {
+            GameEvent.BUS.publish(new PrintMessageEvent(""));
+        }
+
+        if (key.equals("4"))
+        {
+            GameEvent.BUS.publish(new PrintMessageEvent(""));
+        }
     }
 }
