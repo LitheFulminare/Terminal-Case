@@ -6,7 +6,7 @@ import java.util.List;
 // responsável por lidar com a inscrição de desinscrição nos eventos e chamar quando algo é publicado
 public class EventManager
 {
-    private final List<Subscriber> subscribers = new ArrayList<>();
+    private List<Subscriber> subscribers = new ArrayList<>();
 
     public void subscribe(Subscriber subscriber)
     {
