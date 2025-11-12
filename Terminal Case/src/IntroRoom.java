@@ -1,5 +1,5 @@
 import events.InputEvent;
-import events.RoomEnteredEvent;
+import events.PrintMessageEvent;
 import publisherSubscriber.GameEvent;
 
 public class IntroRoom extends AbstractRoom
@@ -19,7 +19,7 @@ public class IntroRoom extends AbstractRoom
         // emite o evento
         String message = "Ah, você deve ser o investigador forense. Qual seu nome mesmo?";
         GameManager.awaitingName = true;
-        GameEvent.BUS.publish(new RoomEnteredEvent(message));
+        GameEvent.BUS.publish(new PrintMessageEvent(message));
     }
 
     @Override

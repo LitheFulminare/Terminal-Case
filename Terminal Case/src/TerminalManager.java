@@ -1,4 +1,4 @@
-import events.RoomEnteredEvent;
+import events.PrintMessageEvent;
 import publisherSubscriber.GameEvent;
 import publisherSubscriber.Subscriber;
 
@@ -13,7 +13,7 @@ public class TerminalManager implements Subscriber
     @Override
     public void onEvent(GameEvent event)
     {
-        if (event instanceof RoomEnteredEvent e)
+        if (event instanceof PrintMessageEvent e)
         {
             printMessage(e.roomName);
         }
