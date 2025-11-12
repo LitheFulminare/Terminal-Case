@@ -3,8 +3,6 @@ import events.InputEvent;
 import events.PrintMessageEvent;
 import publisherSubscriber.GameEvent;
 
-import java.util.Objects;
-
 public class IntroRoom extends AbstractRoom
 {
     enum states
@@ -38,6 +36,8 @@ public class IntroRoom extends AbstractRoom
     @Override
     public void onEvent(GameEvent gameEvent)
     {
+        System.out.println("Event happened on IntroRoom");
+
         if (gameEvent instanceof InputEvent inputEvent)
         {
             if (currentState == states.choosingName && !inputEvent.key.equals("i"))

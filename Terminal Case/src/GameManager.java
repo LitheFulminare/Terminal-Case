@@ -10,6 +10,7 @@ public class GameManager implements Subscriber
      TerminalManager terminalManager = new TerminalManager();
 
      AbstractRoom currentRoom = new IntroRoom(this);
+     AbstractRoom oldRoom;
 
     public void start()
     {
@@ -33,8 +34,10 @@ public class GameManager implements Subscriber
     {
         if (gameEvent instanceof GoToLivingRoomEvent event)
         {
+            oldRoom = currentRoom;
             currentRoom = new LivingRoom();
             currentRoom.enter();
+            GameEvent.BUS.unsubscribe(oldRoom);
         }
     }
 }
