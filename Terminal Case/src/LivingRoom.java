@@ -81,7 +81,12 @@ public class LivingRoom extends AbstractRoom
         {
             if (gameManager.player.hasItem("Martelo"))
             {
-                System.out.println("player has hammer");
+                GameEvent.BUS.publish(new PrintMessageEvent("\nDepois de um bom esforço, consegui serrar os " +
+                        "pregos e arrastar o sofá."));
+                GameEvent.BUS.publish(new PrintMessageEvent("Atrás do sofá tinha uma seringa com sangue na " +
+                        "agulha."));
+                GameEvent.BUS.publish(new PrintMessageEvent("Eu acho que é seguro assumir que a vítima morreu " +
+                        "por causa de uma overdose."));
             }
             else
             {
@@ -95,11 +100,22 @@ public class LivingRoom extends AbstractRoom
         {
             currentState = states.gettingHammer;
 
-            GameEvent.BUS.publish(new PrintMessageEvent("\n Tem alguns acessórios na gaveta. Não há nada " +
-                    "muito útil a princípio a não ser um martelo. Devo pegar?"));
+            if (gameManager.player.hasItem("Martelo"))
+            {
+                GameEvent.BUS.publish(new PrintMessageEvent("\n Já peguei o martelo, não parece ter mais " +
+                        "nada de útil aqui"));
+                showChoices();
+                currentState = states.choosingInteraction;
+            }
 
-            GameEvent.BUS.publish(new PrintMessageEvent("\nS - sim"));
-            GameEvent.BUS.publish(new PrintMessageEvent("N - não"));
+            else
+            {
+                GameEvent.BUS.publish(new PrintMessageEvent("\nTem alguns acessórios na gaveta. Não há nada " +
+                        "muito útil a princípio a não ser um martelo. Devo pegar?"));
+
+                GameEvent.BUS.publish(new PrintMessageEvent("\nS - sim"));
+                GameEvent.BUS.publish(new PrintMessageEvent("N - não"));
+            }
         }
     }
 }

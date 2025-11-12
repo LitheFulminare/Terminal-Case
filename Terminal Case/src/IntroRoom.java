@@ -84,9 +84,11 @@ public class IntroRoom extends AbstractRoom
 
         GameEvent.BUS.publish(new PrintMessageEvent("\n 2 - Verificar a sala de estar"));
 
+        /*
         GameEvent.BUS.publish(new PrintMessageEvent("\n 3 - Verificar a cozinha"));
 
         GameEvent.BUS.publish(new PrintMessageEvent("\n 4 - Verificar o quarto"));
+        */
     }
 
     private void interaction(String key)
@@ -104,6 +106,7 @@ public class IntroRoom extends AbstractRoom
             GameEvent.BUS.publish(new GoToLivingRoomEvent());
         }
 
+        /*
         if (key.equals("3"))
         {
             GameEvent.BUS.publish(new PrintMessageEvent(""));
@@ -112,6 +115,6 @@ public class IntroRoom extends AbstractRoom
         if (key.equals("4"))
         {
             GameEvent.BUS.publish(new PrintMessageEvent(""));
-        }
+        }*/
     }
 }
