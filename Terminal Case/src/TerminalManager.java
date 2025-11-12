@@ -15,7 +15,7 @@ public class TerminalManager implements Subscriber
     {
         if (event instanceof RoomEnteredEvent e)
         {
-            printMessage("You have entered: " + e.roomName);
+            printMessage(e.roomName);
         }
     }
 

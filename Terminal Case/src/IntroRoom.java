@@ -28,6 +28,12 @@ public class IntroRoom extends AbstractRoom
         if (gameEvent instanceof InputEvent inputEvent)
         {
             gameManager.setPlayerName(inputEvent.key);
+            message1();
         }
+    }
+
+    private void message1()
+    {
+        System.out.println("Certo, senhor " + gameManager.player.name + ", o caso é o seguinte…");
     }
 }
