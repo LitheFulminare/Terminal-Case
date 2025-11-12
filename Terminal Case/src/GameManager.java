@@ -7,6 +7,18 @@ public class GameManager
 
      IntroRoom introRoom = new IntroRoom(this);
 
+     public void waitMillis(long waitTime)
+     {
+         try
+         {
+             wait(waitTime);
+         }
+         catch (InterruptedException e)
+         {
+             throw new RuntimeException(e);
+         }
+     }
+
     public void start()
     {
         introRoom.enter();

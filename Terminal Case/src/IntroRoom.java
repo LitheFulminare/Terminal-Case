@@ -4,6 +4,15 @@ import publisherSubscriber.GameEvent;
 
 public class IntroRoom extends AbstractRoom
 {
+    enum states
+    {
+        choosingName,
+        introMessage,
+        chooseInteraction
+    }
+
+    states currentState = states.choosingName;
+
     GameManager gameManager;
 
     public IntroRoom(GameManager gameManager)
@@ -27,13 +36,35 @@ public class IntroRoom extends AbstractRoom
     {
         if (gameEvent instanceof InputEvent inputEvent)
         {
-            gameManager.setPlayerName(inputEvent.key);
-            message1();
+            if (currentState == states.choosingName)
+            {
+                gameManager.setPlayerName(inputEvent.key);
+                currentState = states.introMessage;
+
+                introMessage();
+            }
         }
     }
 
-    private void message1()
+    private void introMessage()
     {
-        System.out.println("Certo, senhor " + gameManager.player.name + ", o caso é o seguinte…");
+        GameEvent.BUS.publish(new PrintMessageEvent("\nCerto, senhor " + gameManager.player.name + ", o caso é o seguinte…"));
+
+        GameEvent.BUS.publish(new PrintMessageEvent("\nOntem de madrugada, foi feita uma ligação de emergência " +
+                "diretamente desse apartamento. Ninguém falou nada, só ouve uma batida forte no fundo, então a ligação caiu."));
+
+        GameEvent.BUS.publish(new PrintMessageEvent("O despachante acionou uma viatura e quando os policiais chegaram," +
+                " encontraram o corpo dessa mulher."));
+
+        GameEvent.BUS.publish(new PrintMessageEvent("Procuraram a casa inteira, mas não encontraram nenhum " +
+                "sinal de identidade ou algum jeito de identificar a vítima. É aí que você entra."));
+
+        GameEvent.BUS.publish(new PrintMessageEvent("Precisamos ques você vasculhe o apartamento e investigue " +
+                "o corpo da vítima para descobrir sua identidade e a causa da morte"));
+
+        GameEvent.BUS.publish(new PrintMessageEvent("Tenho outros assuntos a tratar, então vou te deixar " +
+                "fazer o seu trabalho. Boa sorte, " + gameManager.player.name + "."));
+
+        currentState = states.chooseInteraction;
     }
 }
