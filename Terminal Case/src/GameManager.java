@@ -35,7 +35,7 @@ public class GameManager implements Subscriber
         if (gameEvent instanceof GoToLivingRoomEvent event)
         {
             oldRoom = currentRoom;
-            currentRoom = new LivingRoom();
+            currentRoom = new LivingRoom(this);
             currentRoom.enter();
             GameEvent.BUS.unsubscribe(oldRoom);
         }

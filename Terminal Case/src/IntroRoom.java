@@ -28,16 +28,13 @@ public class IntroRoom extends AbstractRoom
         GameEvent.BUS.subscribe(this);
 
         // emite o evento
-        String message = "Ah, você deve ser o investigador forense. Qual seu nome mesmo?";
         GameManager.awaitingName = true;
-        GameEvent.BUS.publish(new PrintMessageEvent(message));
+        GameEvent.BUS.publish(new PrintMessageEvent("Ah, você deve ser o investigador forense. Qual seu nome mesmo?"));
     }
 
     @Override
     public void onEvent(GameEvent gameEvent)
     {
-        System.out.println("Event happened on IntroRoom");
-
         if (gameEvent instanceof InputEvent inputEvent)
         {
             if (currentState == states.choosingName && !inputEvent.key.equals("i"))
