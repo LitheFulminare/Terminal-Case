@@ -43,6 +43,10 @@ public class IntroRoom extends AbstractRoom
 
                 introMessage();
             }
+            if (currentState == states.chooseInteraction)
+            {
+                showChoices();
+            }
         }
     }
 
@@ -66,5 +70,16 @@ public class IntroRoom extends AbstractRoom
                 "fazer o seu trabalho. Boa sorte, " + gameManager.player.name + "."));
 
         currentState = states.chooseInteraction;
+    }
+
+    private void showChoices()
+    {
+        GameEvent.BUS.publish(new PrintMessageEvent("\n 1 - Verificar o corpo da vítima"));
+
+        GameEvent.BUS.publish(new PrintMessageEvent("\n 2 - Verificar a sala de estar"));
+
+        GameEvent.BUS.publish(new PrintMessageEvent("\n 3 - Verificar a cozinha"));
+
+        GameEvent.BUS.publish(new PrintMessageEvent("\n 4 - Verificar o quarto"));
     }
 }
