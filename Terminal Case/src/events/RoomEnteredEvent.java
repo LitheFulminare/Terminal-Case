@@ -1,6 +1,6 @@
 package events;
 
-import publishersubscriber.GameEvent;
+import publisherSubscriber.GameEvent;
 
 public class RoomEnteredEvent implements GameEvent
 {
