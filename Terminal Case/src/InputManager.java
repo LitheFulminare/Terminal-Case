@@ -1,3 +1,6 @@
+import events.InputEvent;
+import publisherSubscriber.GameEvent;
+
 import java.util.Scanner;
 
 public class InputManager
